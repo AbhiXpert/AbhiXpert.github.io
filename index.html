@@ -6862,7 +6862,7 @@
                                 </div>
                             </div>
                             <div class="framer-1d8csnx" data-framer-name="Content Right" style="will-change:transform;opacity:0;transform:perspective(1200px) translateY(40px)">
-                                <form class="framer-1llidof" action="https://formspree.io/f/xldbglpp" method="POST">
+                                <form class="framer-1llidof" id="contact-form" action="https://formspree.io/f/xldbglpp" method="POST">
                                     <div class="framer-j7k16x">
                                         <label class="framer-1m6zyqx">
                                             <div class="framer-form-text-input framer-form-input-wrapper framer-1oeiqn3 framer-form-text-input-type">
@@ -6901,6 +6901,29 @@
                                     <input type="text" name="remarks" tabindex="-1" autocomplete="one-time-code" aria-hidden="true" style="position:absolute;transform:scale(0)" data-1p-ignore="true" data-lpignore="true" data-form-type="other" data-bwignore="true" value>
                                     <input type="text" name="comments" tabindex="-1" autocomplete="one-time-code" aria-hidden="true" style="position:absolute;transform:scale(0)" data-1p-ignore="true" data-lpignore="true" data-form-type="other" data-bwignore="true" value>
                                 </form>
+                                <script>
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.stopImmediatePropagation();
+    var form = this;
+    var data = new FormData(form);
+    fetch("https://formspree.io/f/xldbglpp", {
+      method: "POST",
+      body: data,
+      headers: { "Accept": "application/json" }
+    }).then(function(res) {
+      if (res.ok) { alert("Message sent! I'll get back to you soon."); form.reset(); }
+      else { alert("Something went wrong. Please try again."); }
+    }).catch(function() { alert("Something went wrong. Please try again."); });
+  });
+</script>
+```
+
+So it should look like this in your file:
+```
+                                </form>
+                                <script>
+                                  document.getElementById("contact-form")...
+                                </script>
                             </div>
                         </div>
                     </div>
